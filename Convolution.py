@@ -26,9 +26,18 @@ x_val = x_val/255
 # 합성곱층 쌓기
 conv1 = tf.keras.Sequential()  # 컨볼루션을 위한 모델을 하나 쌓기
 conv1.add(Conv2D(10, (3,3), activation='relu', padding='same', input_shape=(28,28,1)))  # 합성곱층
-conv1.add(MaxPooling2D((2,2)))  # 2x2로 maxpooling
-conv1.add(Flatten())  # 완전 연결층에 연결
-conv1.add(Dense(100, activation='relu'))  # 완전연결층으로 하기
+# 특징 클래스 10개라서 10개의 필터 사용
+
+conv1.add(MaxPooling2D((2,2)))              # 2x2로 maxpooling
+conv1.add(Flatten())                        # 완전 연결층에 연결
+conv1.add(Dropout(0.5))                     # 드롭아웃 삽입
+conv1.add(Dense(100, activation='relu'))    # 완전연결층으로 하기
 conv1.add(Dense(10, activation='softmax'))  # 완전연결층 10개로 소프트맥스
 
-conv1.summary()
+conv1.summary()                             # 모델에 대한 서머리
+
+# 모델에 대한 옵티마이져와 손실함수 결정.
+conv1.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# 모델 훈련하기
+conv1.fit(x_train, y_train_encoded, epochs=20, validation_data=(x_val, y_val_encoded))
