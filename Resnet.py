@@ -3,7 +3,7 @@ from functools import partial
 import matplotlib.pyplot as plt
 
 # 기본적인 컨볼루젼에 대한 정의를 해줌
-DefaultConv2D = partial(keras.layers.Conv2D, kernel_size=1, activation='relu', padding="SAME")
+DefaultConv2D = partial(keras.layers.Conv2D, kernel_size=3, activation='relu', padding="SAME")
 
 # ResNet에 대한 클래스
 class ResidualUnit(keras.layers.Layer):
@@ -32,3 +32,4 @@ class ResidualUnit(keras.layers.Layer):
         for layer in self.skip_layers:
             skip_Z = layer(skip_Z)
         return self.activation(Z+skip_Z)
+
