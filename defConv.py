@@ -27,6 +27,7 @@ res34 = tf.keras.layers.Dense(1000, activation='softmax')(x)
 
 model = tf.keras.Model(input_tensor, res34)
 model.summary()
+
 """
 결과
 Model: "model"
