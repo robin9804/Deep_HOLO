@@ -7,7 +7,7 @@ from tensorflow.keras import Input
 def conv2d(inputs, filters):
     x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same')(inputs)
     x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same')(x)
-    # x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.BatchNormalization()(x)
     x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same')(x)
     x = tf.keras.layers.Conv2D(filters, 3, activation='relu', padding='same')(x)
     return x
@@ -21,9 +21,9 @@ x = conv2d(x, 64)
 x = conv2d(x, 128)
 x = conv2d(x, 256)
 x = conv2d(x, 512)
-#x = tf.keras.layers.Flatten()(x)
-res34 = tf.keras.layers.GlobalAveragePooling2D()(x)
-#res34 = tf.keras.layers.Dense(1000, activation='softmax')(x)
+#x = tf.keras.layers.Flatten()(x)  얘가 차원을 줄여벌였다.
+x = tf.keras.layers.GlobalAveragePooling2D()(x)
+res34 = tf.keras.layers.Dense(1000, activation='softmax')(x)
 
 model = tf.keras.Model(input_tensor, res34)
 model.summary()
