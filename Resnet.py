@@ -23,7 +23,7 @@ class ResidualUnit(keras.layers.Layer):
             self.skip_layers = [DefaultConv2D(filters, kernel_size=1, strides=strides),
                                 keras.layers.BatchNormalization()]
 
-    def calling(self, inputs):
+    def call(self, inputs):
         # 번호에 따라 몇 번 스킵하는 메서드
         Z = inputs
         for layer in self.main_layers:
