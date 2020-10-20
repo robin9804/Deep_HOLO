@@ -6,17 +6,16 @@ import matplotlib.pyplot as plt
 # parameters
 w = 2448
 h = 2048
-num_file = 5
+num_file = 100
 
 out_mat = np.zeros((num_file, 1024, 1024, 2))
-h5name = 'dataset.h5'
 
 # hdf5 file open
-f = h5py.File('data4.h5', 'w')
+f = h5py.File('data100.h5', 'w')
 
 for i in range(num_file):
     # num = "d%d" %(i+1)
-    fname = "test%d.raw" % (i + 1)
+    fname = "test21-%d.raw" % (i + 150)
     with open(fname, 'r') as raw:
         img = np.fromfile(raw, np.dtype('u1'), w * h).reshape(h, w)
         img = img[:, (w - h) // 2: (w + h) // 2]  # crop
@@ -53,5 +52,5 @@ f.create_dataset('data', data=out_mat)
 f.close()
 
 # read data
-x_data = tf.keras.utils.HDF5Matrix('data4.h5', 'data')
+x_data = tf.keras.utils.HDF5Matrix('data100.h5', 'data')
 print(x_data.shape)
