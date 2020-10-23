@@ -3,6 +3,11 @@ import matplotlib.cm as cm
 import numpy as np
 from PIL import Image
 
+# 기본적인 stereo matching 알고리즘에서 출발
+# denoising 알고리즘 역시 적용해야 할 것으로 보임
+
+
+
 def stereo_match(left_image, right_image, kernel, max_offset):
     h, w = left_image.shape  # assume that both images are same size
 
